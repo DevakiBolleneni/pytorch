@@ -2,6 +2,7 @@
 set -eux -o pipefail
 
 GPU_ARCH_VERSION=${GPU_ARCH_VERSION:-}
+PYTORCH_EXTRA_INSTALL_REQUIREMENTS=${PYTORCH_EXTRA_INSTALL_REQUIREMENTS:-}
 
 # Set CUDA architecture lists to match x86 build_cuda.sh
 if [[ "$GPU_ARCH_VERSION" == *"12.6"* ]]; then
@@ -11,7 +12,7 @@ elif [[ "$GPU_ARCH_VERSION" == *"12.8"* ]]; then
 elif [[ "$GPU_ARCH_VERSION" == *"12.9"* ]]; then
     export TORCH_CUDA_ARCH_LIST="8.0;9.0;10.0;12.0"
 elif [[ "$GPU_ARCH_VERSION" == *"13.0"* ]]; then
-    export TORCH_CUDA_ARCH_LIST="8.0;9.0;10.0;11.0;12.0+PTX"
+    export TORCH_CUDA_ARCH_LIST="7.5;8.0;9.0;10.0;11.0;12.0+PTX"
 fi
 
 # Compress the fatbin with -compress-mode=size for CUDA 13
